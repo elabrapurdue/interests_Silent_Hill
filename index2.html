@@ -101,24 +101,40 @@
       $(document).ready(() => {
         setUpGames();
 
-        // hover reveals detail
+        // Hover reveals detail
         $(".wrapper").on("mouseover", ".game", function () {
           let index = $(".game").index(this);
           $(this).find(".info").text(games[index].detail);
           $(this).css("background-color", "#330000");
         });
 
-        // mouseout restores summary
+        // Mouseout restores summary
         $(".wrapper").on("mouseout", ".game", function () {
           let index = $(".game").index(this);
-          $(this).find(".info").html(`${games[index].title}<br>${games[index].summary}`);
+          $(this)
+            .find(".info")
+            .html(`${games[index].title}<br>${games[index].summary}`);
           $(this).css("background-color", "#222");
         });
 
-        // click highlights selected game
+        // Click shows trivia and highlights card
         $(".wrapper").on("click", ".game", function () {
-          $(".game").css("box-shadow", "0 0 10px #cc0000"); // reset others
-          $(this).css("box-shadow", "0 0 15px #00ff00");
+          $(".game").css({
+            "box-shadow": "0 0 10px #cc0000",
+            "background-color": "#222",
+          }); // Reset all cards
+
+          let index = $(".game").index(this);
+          $(this).css({
+            "box-shadow": "0 0 15px #00ff00",
+            "background-color": "green",
+          });
+
+          $(this)
+            .find(".info")
+            .html(
+              `${games[index].title}<br>${games[index].summary}<br><em>${games[index].detail}</em>`
+            );
         });
       });
     </script>
