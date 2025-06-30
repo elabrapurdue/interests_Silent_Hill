@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Silent Hill Franchise Viewer</title>
+    <script src="jquery-3.7.1.js"></script>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #111;
+        color: #eee;
+        text-align: center;
+        padding: 20px;
+      }
+      h1 {
+        color: #cc0000;
+      }
+      .wrapper {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 20px;
+        margin-top: 20px;
+      }
+      .game {
+        background-color: #222;
+        border: 1px solid #555;
+        width: 220px;
+        padding: 10px;
+        border-radius: 8px;
+        box-shadow: 0 0 10px #cc0000;
+        cursor: pointer;
+        transition: transform 0.2s;
+      }
+      .game img {
+        width: 100%;
+        height: 140px;
+        object-fit: cover;
+        border-radius: 4px;
+      }
+      .game p {
+        margin-top: 10px;
+        font-size: 14px;
+      }
+      .game:hover {
+        transform: scale(1.05);
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Silent Hill Game Franchise</h1>
+    <div class="wrapper"></div>
+
+    <script>
+      const games = [
+        {
+          title: "Silent Hill",
+          summary: "Released in 1999. Play as Harry Mason who is in search of his daughter.",
+          detail: "Genre: Survival Horror. Platform: PS1. Known for psychological terror.",
+          img: "sh1.jpg",
+        },
+        {
+          title: "Silent Hill 2",
+          summary: "Released in 2001. James Sunderland searches for his wife.",
+          detail: "Genre: Psychological Horror. Platform: PS, Windows. Highly acclaimed.",
+          img: "sh2.jpg",
+        },
+        {
+          title: "Silent Hill 3",
+          summary: "Released in 2003. Follows Heather Mason on her journey to the past and present.",
+          detail: "Continuation of SH1 story. Strong atmosphere and horror. Platform: PS2",
+          img: "sh3.jpg",
+        },
+        {
+          title: "Silent Hill 4: The Room",
+          summary: "Released in 2004. A man trapped in his apartment.",
+          detail: "Unique gameplay, known for disturbing imagery. Platform: PS2, Xbox, Windows",
+          img: "sh4.jpg",
+        },
+        {
+          title: "Silent Hill: Shattered Memories",
+          summary: "A reimagining of the first game with psychological profiling.",
+          detail: "Released in 2009. Platform: Wii, PS2, PSP.",
+          img: "sh_sm.jpg",
+        },
+      ];
+
+      const setUpGames = () => {
+        const wrapper = $(".wrapper");
+        games.forEach((game) => {
+          const card = `
+            <div class="game">
+              <img src="${game.img}" alt="${game.title}" />
+              <p class="info">${game.title}<br>${game.summary}</p>
+            </div>`;
+          wrapper.append(card);
+        });
+      };
+
+      $(document).ready(() => {
+        setUpGames();
+
+        // hover reveals detail
+        $(".wrapper").on("mouseover", ".game", function () {
+          let index = $(".game").index(this);
+          $(this).find(".info").text(games[index].detail);
+          $(this).css("background-color", "#330000");
+        });
+
+        // mouseout restores summary
+        $(".wrapper").on("mouseout", ".game", function () {
+          let index = $(".game").index(this);
+          $(this).find(".info").html(`${games[index].title}<br>${games[index].summary}`);
+          $(this).css("background-color", "#222");
+        });
+
+        // click highlights selected game
+        $(".wrapper").on("click", ".game", function () {
+          $(".game").css("box-shadow", "0 0 10px #cc0000"); // reset others
+          $(this).css("box-shadow", "0 0 15px #00ff00");
+        });
+      });
+    </script>
+  </body>
+</html>
