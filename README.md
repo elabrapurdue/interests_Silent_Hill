@@ -1,2 +1,2 @@
-To run webpage, copy and paste:
+To run webpage, click or copy and paste:
 https://elabrapurdue.github.io/interests_Silent_Hill/index2.html 
